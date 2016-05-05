@@ -15,7 +15,8 @@ module.exports = function(app) {
         Nerd.find(function(err, nerds) {
 
             // if there is an error retrieving, send the error. 
-                            // nothing after res.send(err) will execute
+            // nothing after res.send(err) will execute
+            
             if (err)
                 res.send(err);
 
