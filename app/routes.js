@@ -51,6 +51,28 @@ module.exports = function(app) {
 
     // route to handle delete goes here (app.delete)
 
+     app.delete('/api/nerds/:id', function(req, res) {
+
+        if ( req.params.id )
+        {
+
+            // create a nerd, information comes from AJAX request from Angular
+            Nerd.findByIdAndRemove(req.params.id, function(err, nerd) {
+                console.log(err);
+                if (err)
+                    res.send(err);
+
+                // return ok
+                res.send("OK");
+                
+            });
+        }
+        else
+            res.send("No ID specified");
+
+    });
+
+
     // frontend routes =========================================================
     // route to handle all angular requests
     app.get('*', function(req, res) {
