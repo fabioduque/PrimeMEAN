@@ -24,7 +24,31 @@ module.exports = function(app) {
         });
     });
 
+
+
     // route to handle creating goes here (app.post)
+    // create nerd and send back all nerds after creation
+    app.post('/api/nerds', function(req, res) {
+
+        // create a nerd, information comes from AJAX request from Angular
+        Nerd.create({
+            name : req.body.name,
+            age: req.body.age
+        }, function(err, nerd) {
+            if (err)
+                res.send(err);
+
+            // get and return all the nerds after you create another
+            Nerd.find(function(err, nerds) {
+                if (err)
+                    res.send(err)
+                res.json(nerds);
+            });
+        });
+
+    });
+
+
     // route to handle delete goes here (app.delete)
 
     // frontend routes =========================================================
