@@ -1,0 +1,26 @@
+<!-- public/views/home.html -->
+
+<div class="jumbotron text-center">
+    <h1>Lista de livros!</h1>
+
+	<div class="panel panel-primary" ng-show="created">
+		Livro criado com sucesso!
+	</div>
+
+
+	<table border=1 ng-show="books && books.length > 0">
+		<tr>
+			<th>Título</th>
+			<th>Apagar?</th>
+		</tr>
+		<tr ng-repeat="n in books">
+			<td>{{n.title ? n.title : "(n/a)" }}</td>
+			<td><button class="btn btn-primary" ng-click="deleteBook($index)">x</button></td>
+		</tr>
+	</table>
+
+	<div class="alert alert-warning" ng-hide="books && books.length > 0">
+		Não existem livros para mostrar!
+	</div>
+
+</div>

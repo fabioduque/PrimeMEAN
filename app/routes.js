@@ -1,7 +1,4 @@
- // app/routes.js
-
-// grab the nerd model we just created
-var Nerd = require('./models/nerd');
+var Book = require('./models/book');
 
 module.exports = function(app) {
 
@@ -10,9 +7,9 @@ module.exports = function(app) {
     // authentication routes
 
     // sample api route
-    app.get('/api/nerds', function(req, res) {
-        // use mongoose to get all nerds in the database
-        Nerd.find(function(err, nerds) {
+    app.get('/api/books', function(req, res) {
+        // use mongoose to get all books in the database
+        Book.find(function(err, books) {
 
             // if there is an error retrieving, send the error. 
             // nothing after res.send(err) will execute
@@ -20,29 +17,28 @@ module.exports = function(app) {
             if (err)
                 res.send(err);
 
-            res.json(nerds); // return all nerds in JSON format
+            res.json(books); // return all books in JSON format
         });
     });
 
 
 
     // route to handle creating goes here (app.post)
-    // create nerd and send back all nerds after creation
-    app.post('/api/nerds', function(req, res) {
+    // create book and send back all books after creation
+    app.post('/api/books', function(req, res) {
 
-        // create a nerd, information comes from AJAX request from Angular
-        Nerd.create({
-            name : req.body.name,
-            age: req.body.age
-        }, function(err, nerd) {
+        // create a book, information comes from AJAX request from Angular
+        Book.create({
+            title: req.body.title
+        }, function(err, book) {
             if (err)
                 res.send(err);
 
-            // get and return all the nerds after you create another
-            Nerd.find(function(err, nerds) {
+            // get and return all the books after you create another
+            Book.find(function(err, books) {
                 if (err)
                     res.send(err)
-                res.json(nerds);
+                res.json(books);
             });
         });
 
@@ -51,17 +47,16 @@ module.exports = function(app) {
 
     // route to handle delete goes here (app.delete)
 
-     app.delete('/api/nerds/:id', function(req, res) {
+    app.delete('/api/books/:id', function(req, res) {
 
         if ( req.params.id )
         {
 
-            // create a nerd, information comes from AJAX request from Angular
-            Nerd.findByIdAndRemove(req.params.id, function(err, nerd) {
+            // create a book, information comes from AJAX request from Angular
+            Book.findByIdAndRemove(req.params.id, function(err, book) {
                 console.log(err);
                 if (err)
                     res.send(err);
-
                 // return ok
                 res.send("OK");
                 
@@ -72,11 +67,28 @@ module.exports = function(app) {
 
     });
 
+    app.delete('/api/books/deleteAll', function(req, res) {
+        console.log("Delete All");
+        
+            // create a book, information comes from AJAX request from Angular
+        // Book.remove({}, function(err, book) {
+        //     console.log(err);
+        //     if (err)
+        //         res.send(err);
+
+        //     // return ok
+        //     res.send("OK");
+            
+        // });
+        
+
+    });
+
 
     // frontend routes =========================================================
     // route to handle all angular requests
     app.get('*', function(req, res) {
-        res.sendfile('./public/views/index.html'); // load our public/index.html file
+        res.sendfile('./public/index.html'); // load our public/index.html file
     });
 
 };
