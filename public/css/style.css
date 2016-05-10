@@ -1,8 +1,13 @@
+[ng-cloak]
+{
+	display: none !important;
+}
+
 body
 {
 	font-family: sans-serif;
 	font-size: 16px;
-	
+	background: #ddd;
 }
 table
 {
@@ -11,10 +16,45 @@ table
 }
 th 
 {
-	text-align: center;
+	background: #bbb;
+	color: black;
 }
 
 td, th
 {
 	padding: 0.5em;
+}
+
+th:first-child, td:first-child
+{
+	text-align: left;
+	width: 90%;
+}
+
+th:last-child, td:last-child
+{
+	text-align: center;
+	width: 10%;
+}
+
+.editable
+{
+	vertical-align: middle;
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+}
+.editable:hover
+{
+	cursor: pointer;
+	border: 1px dotted #f00;
+	border-width: 0 0 1px 0;
+	
+}
+
+input.editing
+{
+	background: #fff;	
+	border: 1px solid #abc;
+	padding: 0.3em 0.6em;
 }

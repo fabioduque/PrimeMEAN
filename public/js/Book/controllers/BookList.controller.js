@@ -1,8 +1,68 @@
-angular.module('BookModule')
-.controller('BookListController', function($rootScope, $scope, $location, BookService) {
+angular.module( 'BookModule' )
+	.controller( 'BookListController', function( $rootScope, $scope, $location, $uibModal, BookService ) {
 
-        BookService.get().then(function (bookList) {
-        	$scope.books = bookList;
-        });
+		// Fire the books fetch (get)
+		BookService.get().then( function( bookList ) {
+			$scope.books = bookList;
+		} );
 
-});
+
+
+		$scope.editBook = function( book ) {
+			book.editing = true;
+			beforeUpdateTitle = book.title;
+		}
+
+		$scope.finishEditBook = function( book ) {
+			book.editing = false;
+
+			updateBook(book);
+			
+		}
+
+		$scope.deleteBook = function( index ) {
+
+			$scope.selectedBook = getBookByIndex( index );
+
+			var modalInstance = $uibModal.open( {
+				templateUrl: 'myModalContent.html',
+				controller: 'ModalInstanceCtrl',
+				size: "large",
+				resolve: {
+					selectedBook: function() {
+						return $scope.selectedBook;
+					}
+				}
+			} );
+
+			modalInstance.result.then( function( book ) {
+
+				// Delete the book
+				BookService.delete( book._id ).then( function( res ) {
+					if ( res ) {
+						console.log( res );
+						$rootScope.$broadcast( "alert", {
+							msg: 'Livro \'' + book.title + '\' apagado'
+						} );
+
+						// Update the list of books with the returned one
+						$scope.books = res;
+					}
+				} )
+
+			}, function( err ) {
+				console.log( err );
+			} );
+		};
+
+		function getBookByIndex( index ) {
+			return $scope.books[ index ];
+		}
+
+		function updateBook (book) {
+			BookService.update( book ).then( function( updatedBook ) {
+				book = updatedBook;
+			} )
+			
+		}
+	} );

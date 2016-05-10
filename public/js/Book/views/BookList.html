@@ -8,13 +8,16 @@
 	</div>
 
 
-	<table border=1 ng-show="books && books.length > 0">
+	<table class="table table-hover table-bordered table-condensed" ng-show="books && books.length > 0">
 		<tr>
 			<th>Título</th>
 			<th>Apagar?</th>
 		</tr>
-		<tr ng-repeat="n in books">
-			<td>{{n.title ? n.title : "(n/a)" }}</td>
+		<tr ng-repeat="b in books">
+			<td>
+				<span class="editable" ng-hide="b.editing" ng-dblclick="editBook(b)">{{b.title ? b.title : "(n/a)" }}</span>
+				<input type="text" ng-show="b.editing" ng-blur="finishEditBook(b)" ng-model="b.title" ng-class="{'editing' : b.editing}" autofocus>
+			</td>
 			<td><button class="btn btn-primary" ng-click="deleteBook($index)">x</button></td>
 		</tr>
 	</table>

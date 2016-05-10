@@ -14,8 +14,8 @@ angular.module('BookModule')
         },
 
         // call to UPDATE a given book
-        update: function(id, bookData) {
-            return $http.put('/api/books/' + id, bookData).then(function (data) {return data.data});
+        update: function(bookData) {
+            return $http.put('/api/books/' + bookData._id, bookData).then(function (data) {return data.data});
         },
 
         // call to DELETE a book

@@ -44,6 +44,25 @@ module.exports = function(app) {
 
     });
 
+    app.put('/api/books/:id', function(req, res) {
+
+        if ( req.params.id )
+        {
+
+            // create a book, information comes from AJAX request from Angular
+            Book.findByIdAndUpdate(req.params.id, req.body, function(err, book) {
+                console.log(err);
+                if (err)
+                    res.send(err);
+                
+                res.send(book);               
+                
+            });
+        }
+        else
+            res.send("No ID specified");
+
+    });
 
     // route to handle delete goes here (app.delete)
 
@@ -57,8 +76,18 @@ module.exports = function(app) {
                 console.log(err);
                 if (err)
                     res.send(err);
-                // return ok
-                res.send("OK");
+                
+                // return the new list of books
+                Book.find(function(err, books) {
+
+                    // if there is an error retrieving, send the error. 
+                    // nothing after res.send(err) will execute
+                    
+                    if (err)
+                        res.send("Delete OK, Fetch Failed");
+
+                    res.json(books); // return all books in JSON format
+                });
                 
             });
         }
@@ -78,7 +107,7 @@ module.exports = function(app) {
 
         //     // return ok
         //     res.send("OK");
-            
+
         // });
         
 

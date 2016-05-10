@@ -1,8 +1,9 @@
 // public/js/app.js
 angular.module("PrimeMEAN", [
 	"ngRoute", 
-	"BookModule"
-])
+	"ui.bootstrap",
+    "BookModule"
+    ])
 .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider
@@ -28,9 +29,9 @@ angular.module("PrimeMEAN", [
         //     redirectTo: '/'
         // } )
 
-    $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true);
 
-}])
+    }])
 .controller("AppController", function ($rootScope, $scope) {
 
 	$rootScope.$on("alert", function (event, args) {
@@ -39,5 +40,14 @@ angular.module("PrimeMEAN", [
 	});
 
 
-});
+})
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, selectedBook) {
+    $scope.selectedBook = selectedBook;
+    $scope.ok = function () {
+        $uibModalInstance.close(selectedBook);
+    };
 
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
