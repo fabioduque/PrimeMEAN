@@ -21,11 +21,11 @@ Arranca o servidor e monitoriza alterações a ficheiros, para não ser necessá
 `npm install -g nodemon`
 
 
-## Instalação
+## Instalação ##
 - Instalar node modules: `npm install`
 - Instalar frontend packages: `bower install`
 
-# Arranque
+## Arranque ##
 `node server.js`
 
 ou se o **nodemon** estiver instalado:
