@@ -1,27 +1,31 @@
 <!-- public/views/home.html -->
 
 <div class="jumbotron text-center">
-    <h1>Lista de livros!</h1>
+    <div class="page-header">
+    	<h2>Lista de livros</h2>     	
+    </div>
 
 	<div class="panel panel-primary" ng-show="created">
 		Livro criado com sucesso!
 	</div>
 
-
+	
 	<table class="table table-hover table-bordered table-condensed" ng-show="books && books.length > 0">
 		<tr>
 			<th>Título</th>
-			<th>Apagar?</th>
+			<th>Apagar</th>
 		</tr>
 		<tr ng-repeat="b in books">
 			<td>
+				<i class="fa fa-book"></i>
 				<span class="editable" ng-hide="b.editing" ng-dblclick="editBook(b)">{{b.title ? b.title : "(n/a)" }}</span>
 				<input type="text" ng-show="b.editing" ng-blur="finishEditBook(b)" ng-model="b.title" ng-class="{'editing' : b.editing}" autofocus>
 			</td>
-			<td><button class="btn btn-primary" ng-click="deleteBook($index)">x</button></td>
+			<td><button class="btn btn-primary" ng-click="deleteBook($index)"><i class="fa fa-trash"></i></button></td>
 		</tr>
 	</table>
-
+	
+	<a href="book/create"><i class="fa fa-plus"></i> Criar novo livro</a>
 	<div class="alert alert-warning" ng-hide="books && books.length > 0">
 		Não existem livros para mostrar!
 	</div>
