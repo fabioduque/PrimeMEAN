@@ -58,3 +58,8 @@ input.editing
 	border: 1px solid #abc;
 	padding: 0.3em 0.6em;
 }
+
+.jumbotron
+{
+	background: #f8f8f8;
+}
