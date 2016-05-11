@@ -1,12 +1,12 @@
 angular.module( 'BookModule' )
-	.controller( 'BookListController', function( $rootScope, $scope, $location, $uibModal, BookService ) {
+	.controller( 'BookListController', function( $rootScope, $scope, $location, $uibModal, BookService, $timeout ) {
 
 		// Fire the books fetch (get)
 		BookService.get().then( function( bookList ) {
 			$scope.books = bookList;
 		} );
 
-
+		var beforeUpdateTitle;
 
 		$scope.editBook = function( book ) {
 			book.editing = true;
@@ -14,9 +14,18 @@ angular.module( 'BookModule' )
 		}
 
 		$scope.finishEditBook = function( book ) {
-			book.editing = false;
+			book.editing = false;				
+			
 
-			updateBook(book);
+			updateBook(book).then(function () {
+				$rootScope.$broadcast("alert", {"msg": "Livro com o título '" + beforeUpdateTitle 
+					+ "', alterado para o título '" +  book.title + "'."});
+				book.finishedEditing = true;
+
+				$timeout(function () {
+					book.finishedEditing = false;
+				}, 5000);
+			});
 			
 		}
 
@@ -60,8 +69,9 @@ angular.module( 'BookModule' )
 		}
 
 		function updateBook (book) {
-			BookService.update( book ).then( function( updatedBook ) {
+			return BookService.update( book ).then( function( updatedBook ) {
 				book = updatedBook;
+				return true;
 			} )
 			
 		}

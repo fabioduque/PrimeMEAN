@@ -86,3 +86,26 @@ input.editing
     to 		{ transform: translateY(0);  }    
     from    { transform: translateY(100%);  }
 }
+
+
+.book-item
+{
+	padding: 1em 1em;
+	margin: 1em 0em;
+	
+	background: white;
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+	border-radius: 5px;
+
+	transition: 0.3s all ease-in-out;
+}
+
+.book-item--editing
+{
+	background: rgba(255,255,0,0.15);
+}
+
+.book-item--finished_editing
+{
+	background: rgba(0,255,0,0.1);
+}

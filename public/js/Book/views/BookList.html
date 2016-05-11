@@ -10,7 +10,19 @@
 	</div>
 
 	
-	<table class="table table-hover table-bordered table-condensed" ng-show="books && books.length > 0">
+	<div class="book-list">
+		<div ng-repeat="b in books" class="book-item clearfix" ng-class="{'book-item--editing' : b.editing, 'book-item--finished_editing' : b.finishedEditing}">
+			<div class="pull-left">
+				<i class="fa fa-book"></i>
+				<span class="editable" ng-hide="b.editing" ng-dblclick="editBook(b)">{{b.title ? b.title : "(n/a)" }}</span>
+				<input type="text" ng-show="b.editing" ng-blur="finishEditBook(b)" ng-model="b.title" ng-class="{'editing' : b.editing}" autofocus>
+			</div>
+
+			<button class="btn btn-primary pull-right" ng-click="deleteBook($index)"><i class="fa fa-trash"></i></button>
+		</div>
+	</div>
+
+	<!-- <table class="table table-hover table-bordered table-condensed" ng-show="books && books.length > 0">
 		<tr>
 			<th>Título</th>
 			<th>Apagar</th>
@@ -23,7 +35,7 @@
 			</td>
 			<td><button class="btn btn-primary" ng-click="deleteBook($index)"><i class="fa fa-trash"></i></button></td>
 		</tr>
-	</table>
+	</table> -->
 	
 	<div class="alert alert-warning" ng-hide="books && books.length > 0">
 		Não existem livros para mostrar!
