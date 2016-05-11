@@ -1,31 +1,37 @@
 <!-- public/views/home.html -->
 
 <div class="jumbotron text-center">
-    <div class="page-header">
-    	<h2>Lista de livros</h2>     	
-    </div>
 
-	<div class="panel panel-primary" ng-show="created">
-		Livro criado com sucesso!
-	</div>
-
+	<h2>Lista de livros</h2>     	
 	
-	<div class="book-list">
-		<div ng-repeat="b in books" class="book-item clearfix" ng-class="{'book-item--editing' : b.editing, 'book-item--finished_editing' : b.finishedEditing}">
-			<div class="pull-left">
-				<i class="fa fa-book"></i>
-				<span class="editable" ng-hide="b.editing" ng-dblclick="editBook(b)">{{b.title ? b.title : "(n/a)" }}</span>
-				<input type="text" ng-show="b.editing" ng-blur="finishEditBook(b)" ng-model="b.title" ng-class="{'editing' : b.editing}" autofocus>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="book-list">
+				<div ng-repeat="b in books" class="book-item clearfix" ng-class="{'book-item--editing' : b.editing, 'book-item--finished_editing' : b.finishedEditing}">
+					<div class="pull-left">
+						<i class="fa fa-book"></i>
+						<span class="editable" ng-hide="b.editing" ng-dblclick="editBook(b)">{{b.title ? b.title : "(n/a)" }}</span>
+						<input type="text" ng-show="b.editing" ng-blur="finishEditBook(b)" ng-model="b.title" ng-class="{'editing' : b.editing}" autofocus>
+					</div>
+			
+					<button class="btn btn-primary pull-right" ng-click="deleteBook($index)"><i class="fa fa-trash"></i></button>
+				</div>
 			</div>
-
-			<button class="btn btn-primary pull-right" ng-click="deleteBook($index)"><i class="fa fa-trash"></i></button>
 		</div>
 	</div>
 	
-	<div class="alert alert-warning" ng-hide="books && books.length > 0">
-		Não existem livros para mostrar!
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="well well-info" ng-hide="books && books.length > 0">
+				Não existem livros para mostrar!
+			</div>
+		</div>
 	</div>
-	
-	<a href="book/create"><i class="fa fa-plus"></i> Criar novo livro</a>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<a href="book/create"><i class="fa fa-plus"></i> Criar novo livro</a>
+		</div>
+	</div>
 
 </div>

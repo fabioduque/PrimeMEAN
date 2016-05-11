@@ -63,6 +63,7 @@ input.editing
 {
 	background: #f8f8f8;
 	box-shadow: 2px 2px 3px #999;
+	margin-top: 0; padding-top: 0.5em;
 }
 
 
@@ -90,6 +91,12 @@ input.editing
 	background: rgba(0,255,0,0.1);
 }
 
+.book-item.ng-leave
+{
+	animation: slideLeft 1s both ease-in-out;
+}
+
+/* Animations */
 	
 .animate-view.ng-leave
 {
@@ -101,13 +108,28 @@ input.editing
 
 }
 
+@keyframes slideLeft {
+	from 	{ transform: translateX(0); opacity: 1; }
+	to 		{ transform: translateX(-100%); opacity: 0;}
+}
+
 @keyframes fadeOut {
-    from  {  transform: scale(1); opacity: 1; }
-    to    {  transform: scale(0); opacity: 0; }
+    from  	{  transform: scale(1); opacity: 1; }
+    to    	{  transform: scale(0); opacity: 0; }
 }
 
 
 @keyframes slideFromBottom {
-    to 		{ transform: translateY(0);  }    
     from    { transform: translateY(100%);  }
+    to 		{ transform: translateY(0);  }    
+}
+
+
+.alert
+{
+	z-index: 999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
 }
