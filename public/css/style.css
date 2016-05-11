@@ -7,7 +7,7 @@ body
 {
 	font-family: sans-serif;
 	font-size: 16px;
-	background: #ddd;
+	background: #eee;
 }
 table
 {
@@ -62,4 +62,27 @@ input.editing
 .jumbotron
 {
 	background: #f8f8f8;
+	box-shadow: 2px 2px 3px #999;
+}
+
+	
+.animate-view.ng-leave
+{
+    animation: fadeOut 0.4s both cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+.animate-view.ng-enter
+{
+    animation: slideFromBottom 0.4s both cubic-bezier(0.250, 0.460, 0.450, 0.940);
+
+}
+
+
+@keyframes fadeOut {
+    to    {  scale: 0; opacity: 0 }
+}
+
+
+@keyframes slideFromBottom {
+    to 		{ transform: translateY(0);  }    
+    from    { transform: translateY(100%);  }
 }

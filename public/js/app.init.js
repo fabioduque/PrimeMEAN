@@ -1,6 +1,7 @@
 // public/js/app.js
 angular.module("PrimeMEAN", [
 	"ngRoute", 
+    "ngAnimate",
 	"ui.bootstrap",
     "BookModule"
     ])
