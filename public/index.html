@@ -33,8 +33,15 @@
 <body ng-app="PrimeMEAN" ng-controller="AppController" ng-cloak>
 <div class="container">
 
-    <a class="navbar-brand" href="/">PrimeIT MEAN <i class="fa fa-home"></i></a>
+    <div class="page-header">
+        <a class="title" href="/"><strong>PrimeIT MEAN</strong> <i class="fa fa-home"></i></a>
+    </div>
+    
+
     <div class="clearfix"></div>
+
+    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</uib-alert>
+
     <div class="alert alert-info alert-dismissible" ng-show="showMessage" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         {{ msg }}

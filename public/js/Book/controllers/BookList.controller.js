@@ -19,7 +19,7 @@ angular.module( 'BookModule' )
 
 			updateBook(book).then(function () {
 				$rootScope.$broadcast("alert", {"msg": "Livro com o título '" + beforeUpdateTitle 
-					+ "', alterado para o título '" +  book.title + "'."});
+					+ "', alterado para o título '" +  book.title + "'.", type: 'success'});
 				book.finishedEditing = true;
 
 				$timeout(function () {
@@ -52,10 +52,10 @@ angular.module( 'BookModule' )
 						console.log( res );
 						$rootScope.$broadcast( "alert", {
 							msg: 'Livro \'' + book.title + '\' apagado'
-						} );
+						, type: 'danger' } );
 
 						// Update the list of books with the returned one
-						$scope.books = res;
+						$scope.books.splice(index, 1);
 					}
 				} )
 

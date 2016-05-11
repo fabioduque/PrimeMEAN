@@ -2,7 +2,7 @@
 angular.module("PrimeMEAN", [
 	"ngRoute", 
     "ngAnimate",
-	"ui.bootstrap",
+    "ui.bootstrap",
     "BookModule"
     ])
 .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -36,9 +36,18 @@ angular.module("PrimeMEAN", [
 .controller("AppController", function ($rootScope, $scope) {
 
 	$rootScope.$on("alert", function (event, args) {
-		$scope.showMessage = true;
-		$scope.msg = args.msg;
+		$scope.addAlert(args.msg)
 	});
+
+    $scope.alerts = [];
+
+    $scope.addAlert = function(msg, type) {
+        $scope.alerts.push({msg: msg, type: type});
+    };
+
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+    };
 
 
 })

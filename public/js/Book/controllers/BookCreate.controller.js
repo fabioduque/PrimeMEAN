@@ -11,7 +11,7 @@ angular.module('BookModule')
 	    BookService.create(bookData)
 	    .then(function (data) {
 	    	console.log("Will broadcast");
-	    	$rootScope.$broadcast("alert", {msg: 'Livro criado com sucesso'});
+	    	$rootScope.$broadcast("alert", {msg: 'Livro criado com sucesso', type: 'success'});
 	    	$location.path("/");
 
 	    });
